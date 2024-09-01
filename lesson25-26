@@ -1,0 +1,33 @@
+SELECT B.starttime
+FROM cd.members M
+JOIN cd.bookings B on
+	B.memid = M.memid
+WHERE M.firstname =  'David' 
+and M.surname = 'Farrell';	
+
+SELECT B.starttime, F.name
+FROM cd.bookings B
+JOIN cd.facilities F on
+	B.facid = F.facid
+WHERE F.name LIKE 'Tennis Court%' 
+and B.starttime BETWEEN '2012-09-21' and '2012-09-22'
+ORDER BY B.starttime;
+
+SELECT DISTINCT B.firstname as firstname, B.surname as surname
+FROM cd.members M
+JOIN cd.members B on
+	M.recommendedby = B.memid
+ORDER BY surname, firstname;
+
+SELECT 
+    M.firstname AS member_firstname,
+    M.surname AS member_surname,
+    B.firstname AS recommender_firstname,
+    B.surname AS recommender_surname
+FROM 
+    cd.members M
+LEFT JOIN 
+    cd.members B ON M.recommendedby = B.memid
+ORDER BY 
+    member_surname, member_firstname;
+	
